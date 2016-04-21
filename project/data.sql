@@ -46,7 +46,7 @@ insert into CERTIFICATION values('CNO6','정보처리기사','2014-01-01','11111
 insert into CERTIFICATION values('CNO7','정보처리기사','2014-01-01','111114');
 insert into CERTIFICATION values('CNO8','정보처리기사','2014-01-01','111115');
 insert into CERTIFICATION values('CNO9','정보처리기사','2014-01-01','111116');
-insert into CERTIFICATION values('CNO10','정보처리기사','2014-01-01','111110');
+insert into CERTIFICATION values('CN10','정보처리기사','2014-01-01','111110');
 
 /*프로젝트 데이터*/
 
