@@ -52,11 +52,11 @@ public class ProjectMain {
   }
 
   private void doEmployee() {
-    System.out.println("1. 개인정보수정\n2. 프로젝트 참가 현황\n3. 메인");
-    System.out.print("선택> ");
-    choice = keyScan.nextLine();
     
     while (!choice.equals("3")) {
+    	System.out.println("1. 개인정보수정\n2. 프로젝트 참가 현황\n3. 메인");
+    	System.out.print("선택> ");
+    	choice = keyScan.nextLine();
       employeeMenuChoice(choice);
     }
   }
@@ -81,15 +81,23 @@ public class ProjectMain {
 
   private void projectParticipate() {
   	//진행중인 프로젝트가 있는지 받아오기.
-  	 System.out.printf("현재 진행중인 프로젝트 코드를 입력하세요: ");
-  	 String input = keyScan.nextLine();
-  	      
-     doEmployee();
-    
-    
+  	if (CommandUtil.confirm(keyScan, "프로젝트 작업을 진행하시겠습니까?")) {
+  		doProjectTask();
+  	}
   }
 
-  private void employeeInfoUpdate() {
+  private void doProjectTask() {
+  	String input;
+  	do{
+  	System.out.print("프로젝트 코드> ");
+  	input = keyScan.nextLine();
+  	if(input.equals("123")) {
+  		break;
+  	}
+  	}while(true); 
+	}
+
+	private void employeeInfoUpdate() {
   	 // 로그인된 사원의 기본 정보 수정하여 저장하게끔..
      System.out.printf("이메일? ");
      String input = keyScan.nextLine();  	
