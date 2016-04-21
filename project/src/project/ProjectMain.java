@@ -62,7 +62,8 @@ public class ProjectMain {
   }
 
   private void employeeMenuChoice(String choice) {
-    switch (choice) {
+
+  	switch (choice) {
     case "1":
       employeeInfoUpdate();
       break;
@@ -75,15 +76,32 @@ public class ProjectMain {
     default:
       System.out.println("잘못 입력하셨습니다.");
     }
+ 
   }
 
   private void projectParticipate() {
-    // TODO Auto-generated method stub
+  	//진행중인 프로젝트가 있는지 받아오기.
+  	 System.out.printf("현재 진행중인 프로젝트 코드를 입력하세요: ");
+  	 String input = keyScan.nextLine();
+  	      
+     doEmployee();
+    
     
   }
 
   private void employeeInfoUpdate() {
-    // TODO Auto-generated method stub
+  	 // 로그인된 사원의 기본 정보 수정하여 저장하게끔..
+     System.out.printf("이메일? ");
+     String input = keyScan.nextLine();  	
+     System.out.printf("암호? ");
+     input = keyScan.nextLine();  	 
+     System.out.printf("전화? " );
+     input = keyScan.nextLine();  	
+     
+     if (CommandUtil.confirm(keyScan, "변경하시겠습니까?")) {
+    	 System.out.println("저장됨");
+     }
+     doEmployee();
     
   }
 
