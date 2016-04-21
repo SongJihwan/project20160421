@@ -1,23 +1,55 @@
 package project;
 
+import java.io.InputStream;
 import java.util.Scanner;
 
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+
+import project.context.ApplicationContext;
+import project.context.request.RequestHandlerMapping;
+import project.controller.AdminController;
 import project.util.CommandUtil;
+import project.util.Session;
 
 public class ProjectMain {
-  Scanner keyScan = new Scanner(System.in);
   String id;
   String pw;
   String choice;
-  
-  public ProjectMain() {}
+  ApplicationContext appContext;
+  RequestHandlerMapping requestHandlerMapping;
+  Scanner keyScan = new Scanner(System.in);
+  Session session = new Session();
   
   public static void main(String[] args) {
     ProjectMain project = new ProjectMain();
     project.run();
   }
   
+  public ProjectMain() {
+    appContext = new ApplicationContext("project");
+    requestHandlerMapping = new RequestHandlerMapping(appContext);
+    appContext.addBean("stdinScan", keyScan);
+    appContext.addBean("session", session);
+    
+    try {
+      InputStream inputStream = Resources.getResourceAsStream(
+          "conf/mybatis-config.xml");
+      appContext.addBean("sqlSessionFactory", 
+          new SqlSessionFactoryBuilder().build(inputStream));
+//      for (Object obj : appContext.getBeans(Object)) {
+//        
+//      }
+    } catch (Exception e) {
+      System.out.println("mybatis 준비 중 오류 발생!\n시스템을 종료하겠습니다.");
+      e.printStackTrace();
+      return;
+    }
+  }
+  
+  
   public void run() {
+
     while (true) {
       System.out.println("1. 로그인\n0. 종료");
       System.out.print("선택> ");
@@ -125,6 +157,7 @@ public class ProjectMain {
   }
 
   private void adminMenuChoice(String choice) {
+    AdminController adminController = new AdminController();
     switch (choice) {
     case "1":
       empoloyeeSupervise();
@@ -133,7 +166,7 @@ public class ProjectMain {
       certificationSupervise();
       break;
     case "3":
-      teamSupervise();
+      adminController.teamSupervise();
       break;
     case "4":
       pmSelect();
@@ -175,41 +208,9 @@ public class ProjectMain {
       
   }
 
-  private void teamSupervise() {
-    while (true) {
-      System.out.println("1. 부서 등록\n2. 부서 수정\n3. 부서 삭제\n4. 부서 조회\n5. 전체 부서 조회\n6. 이전메뉴");
-      System.out.print("선택> ");
-      choice = keyScan.nextLine();
-      if (choice.equals("6")) 
-        break;
-      teamCRUD(choice);
-    }
-  }
+  
 
-  private void teamCRUD(String choice) {
-    switch (choice) {
-    case "1":
-      add();
-      break;
-    case "2":
-      update();
-      break;
-    case "3":
-      delete();
-      break;
-    case "4":
-      oneList();
-      break;
-    case "5":
-      allList();
-      break;
-    case "6":
-      System.out.println();
-      break;
-    default:
-      System.out.println("잘못 입력하셨습니다.");
-    }
-  }
+  
 
   private void allList() {
     // TODO Auto-generated method stub

@@ -23,7 +23,7 @@ public class ApplicationContext {
   HashMap<String,Object> objPool = new HashMap<>();
   
   public ApplicationContext(String basePackage) {
-    String path = ".\\bin\\" + basePackage.replace(".", "\\");
+    String path = "./bin/" + basePackage.replace(".", "/");
     createObject(new File(path));
     injectDependency();
   }

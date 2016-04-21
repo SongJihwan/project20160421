@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="TeamDao">
+   <resultMap type="Team" id="TeamMap">
+   <id column="TMCD" property="code"/>
+   <result column="TMNM" property="teamName"/>
+   </resultMap>
+
+	<insert id="insert" parameterType="Team">
+	insert into TEAM(TMCD,TMNM)
+	 values(#{code},#{teamName})
+	</insert>
+	
+	<update id="update" parameterType="Team">
+	update TEAM set
+	TMNM=#{teamName}
+	</update>
+	<delete id="delete" parameterType="String">
+	delete from TEAM
+	where TMCD=#{code}
+	</delete>
+	
+	<select id="selectList" resultMap="TeamMap">
+		select * from TEAM
+	</select>
+	
+	<select id="selectOne" parameterType="String" resultMap="TeamMap">
+	   select * from TEAM where TMCD=#{code}
+  </select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

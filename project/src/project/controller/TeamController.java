@@ -1,40 +1,84 @@
 package project.controller;
 
-import java.sql.Date;
 import java.util.List;
 import java.util.Scanner;
 
 import project.annotation.Controller;
 import project.annotation.RequestMapping;
+import project.dao.TeamDao;
+import project.domain.Team;
+import project.util.CommandUtil;
 
 
 @Controller
-@RequestMapping("task/")
+@RequestMapping("team")
 public class TeamController {
-  private TaskDao taskDao;
+  private TeamDao teamDao;
+  private Scanner keyScan;
   
-  public void setTaskDao(TaskDao taskDao) {
-    this.taskDao = taskDao;
+  public void setTeamDao(TeamDao teamDao) {
+    this.teamDao = teamDao;
+  }
+  
+  public void setScanner(Scanner keyScan) {
+    this.keyScan = keyScan;
+  }
+  
+  public void teamCRUD(String choice) {
+    switch (choice) {
+    case "1":
+      add(keyScan);
+      break;
+    case "2":
+      update(keyScan);
+      break;
+    case "3":
+      delete(keyScan);
+      break;
+    case "4":
+      oneList(keyScan);
+      break;
+    case "5":
+      list();
+      break;
+    case "6":
+      System.out.println();
+      break;
+    default:
+      System.out.println("잘못 입력하셨습니다.");
+    }
   }
 
-  @RequestMapping("add.do")
-  public void add(Scanner keyScan) {
+  private void oneList(Scanner keyScan) {
+    System.out.print("검색할 부서명? ");
+    String code = keyScan.nextLine();
+
     try {
-      Task task = new Task();
+      Team team = teamDao.selectOne(code);
+      if (team == null) {
+        System.out.println("유효하지 않은 코드입니다.");
+        return;
+      }
+      
+    } catch (Exception e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+    
+  }
 
-      System.out.print("직원이메일? ");
-      task.setWorkerEmail(keyScan.nextLine());
-      System.out.print("작업명? ");
-      task.setTitle(keyScan.nextLine());
-      System.out.print("내용? ");
-      task.setContent(keyScan.nextLine());
-      System.out.print("시작일? ");
-      task.setStartDate(Date.valueOf(keyScan.nextLine()));
-      System.out.print("종료일? ");
-      task.setEndDate(Date.valueOf(keyScan.nextLine()));
+  //  @RequestMapping("add.do")
+  private void add(Scanner keyScan) {
+    try {
+      Team team = new Team();
 
+      System.out.print("부서코드? ");
+      team.setTeamCode(keyScan.nextLine());
+      System.out.print("부서이름? ");
+      team.setTeamName(keyScan.nextLine());
+      
       if (CommandUtil.confirm(keyScan, "저장하시겠습니까?")) {
-        taskDao.insert(task);
+        teamDao.insert(team);
         System.out.println("저장하였습니다.");
       } else {
         System.out.println("저장을 취소하였습니다.");
@@ -44,19 +88,19 @@ public class TeamController {
     }
   }
   
-  @RequestMapping("delete.do")
-  public void delete(Scanner keyScan) {
+//  @RequestMapping("delete.do")
+  private void delete(Scanner keyScan) {
     try {
-      System.out.print("삭제할 작업 번호?");
-      int no = Integer.parseInt(keyScan.nextLine());
+      System.out.print("삭제할 부서 코드?");
+      String code = keyScan.nextLine();
 
       if (CommandUtil.confirm(keyScan, "정말 삭제하시겠습니까?")) {
-       int count = taskDao.delete(no);
+       int count = teamDao.delete(code);
        if (count > 0) {
          System.out.println("삭제하였습니다.");
        
        } else {
-         System.out.println("유효하지 않은 번호이거나, 이미 삭제된 항목입니다.");
+         System.out.println("유효하지 않은 코드이거나, 이미 삭제된 항목입니다.");
        }
       } else {
         System.out.println("삭제를 취소하였습니다.");
@@ -67,15 +111,12 @@ public class TeamController {
     }
   }
   
-  @RequestMapping("list.do")
-  public void list() {
+//  @RequestMapping("list.do")
+  private void list() {
     try {
-      List<Task> tasks = taskDao.selectList();
-      for (Task task : tasks) {
-        System.out.printf("%d, %s, %s, %s, %s, %s, %d\n",
-            task.getNo(), task.getWorkerEmail(), task.getTitle(),
-            task.getContent(), task.getStartDate(),
-            task.getEndDate(), task.getState());
+      List<Team> teams = teamDao.selectList();
+      for (Team team : teams) {
+        System.out.printf("%s, %s", team.getTeamCode(), team.getTeamName());
       }
     } catch (Exception e) {
       e.printStackTrace();
@@ -83,31 +124,25 @@ public class TeamController {
     }
   }
   
-  @RequestMapping("update.do")
-  public void update(Scanner keyScan) {
+//  @RequestMapping("update.do")
+  private void update(Scanner keyScan) {
     try {
-      System.out.print("변경할 작업 번호?");
-      int no = Integer.parseInt(keyScan.nextLine());
+      System.out.print("변경할 부서 코드? ");
+      String code = keyScan.nextLine();
 
-      Task task = taskDao.selectOne(no);
-      if (task == null) {
-        System.out.println("유효하지 않은 번호입니다.");
+      Team team = teamDao.selectOne(code);
+      if (team == null) {
+        System.out.println("유효하지 않은 코드입니다.");
         return;
       }
-     
-      System.out.printf("직원이메일 (%s)? ", task.getWorkerEmail());
-      task.setWorkerEmail(keyScan.nextLine());
-      System.out.printf("작업명 (%s)? ", task.getTitle());
-      task.setTitle(keyScan.nextLine());
-      System.out.printf("내용 (%s)? ", task.getContent());
-      task.setContent(keyScan.nextLine());
-      System.out.printf("시작일 (%s)? ", task.getStartDate());
-      task.setStartDate(Date.valueOf(keyScan.nextLine()));
-      System.out.printf("종료일 (%s)? ", task.getEndDate());
-      task.setEndDate(Date.valueOf(keyScan.nextLine()));
-
+      
+      System.out.print("부서코드? ");
+      team.setTeamCode(keyScan.nextLine());
+      System.out.print("부서이름? ");
+      team.setTeamName(keyScan.nextLine());
+      
       if (CommandUtil.confirm(keyScan, "변경하시겠습니까?")) {
-        int count = taskDao.update(task);
+        int count = teamDao.update(team);
         if (count > 0) {
           System.out.println("변경하였습니다.");
           

@@ -3,7 +3,6 @@ public class Team {
   String teamCode; //PK
   String teamName;
   
-  
   public String getTeamCode() {
     return teamCode;
   }
@@ -16,7 +15,5 @@ public class Team {
   public void setTeamName(String teamName) {
     this.teamName = teamName;
   }
-  
-  
   
 }
