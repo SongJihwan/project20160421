@@ -24,6 +24,7 @@ public class CertificationController {
     try {
       Certification certification = new Certification();
 
+      
       System.out.print("자격증번호?: ");
       certification.setCertificationNo(keyScan.nextLine());
       System.out.print("자격증명?: ");

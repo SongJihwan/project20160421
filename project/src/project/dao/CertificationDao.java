@@ -22,6 +22,7 @@ public class CertificationDao {
   public List<Certification> selectList() throws Exception {
     SqlSession sqlSession = sqlSessionFactory.openSession();
 
+    
     try {
       return sqlSession.selectList("CertificationDao.selectList");
 

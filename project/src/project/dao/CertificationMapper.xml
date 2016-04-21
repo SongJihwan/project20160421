@@ -15,6 +15,7 @@
 insert into CERTIFICATION(CNO,CNM,C_DT,MNO) values(#{no},#{certificationName},#{acquisitionDate},#{employeeNo})
 </insert>
 
+
 <update id="update" parameterType="Certification">
 update CERTIFICATION set
 CNO=#{no},
