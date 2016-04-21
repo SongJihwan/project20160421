@@ -116,7 +116,7 @@ public class TeamController {
     try {
       List<Team> teams = teamDao.selectList();
       for (Team team : teams) {
-        System.out.printf("%s, %s", team.getTeamCode(), team.getTeamName());
+        System.out.printf("%s, %s\n", team.getTeamCode(), team.getTeamName());
       }
     } catch (Exception e) {
       e.printStackTrace();

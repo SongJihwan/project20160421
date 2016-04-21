@@ -158,19 +158,19 @@ public class ProjectMain {
     AdminController adminController = (AdminController) appContext.getBean(AdminController.class);
     switch (choice) {
     case "1":
-      empoloyeeSupervise();
+      adminController.empoloyeeSupervise();
       break;
     case "2":
-      certificationSupervise();
+      adminController.certificationSupervise();
       break;
     case "3":
       adminController.teamSupervise();
       break;
     case "4":
-      pmSelect();
+      adminController.pmSelect();
       break;
     case "5":
-      adminInfoUpdate();
+      adminController.adminInfoUpdate();
       break;
     case "6":
       System.out.println();
@@ -179,70 +179,8 @@ public class ProjectMain {
       System.out.println("잘못 입력하셨습니다.");
     }
   }
-
-  private void adminInfoUpdate() {
-    System.out.println("Admin 계정은 암호만 변경이 가능합니다.");
-    System.out.print("변경하실 암호? ");
-    String pwd = keyScan.nextLine();
-    if (CommandUtil.confirm(keyScan, "변경")) {
-      //db 저장
-      System.out.println("암호를 변경하였습니다.");
-    } else {
-      System.out.println("암호 변경을 취소하였습니다.");
-    }
-  }
-
-  private void pmSelect() {
-    //select문 사용해서 리턴하여 리스트 받아온 후
-    System.out.print("PM으로 지정할 사원을 선택해주세요. ");
-    int pmMno = Integer.parseInt(keyScan.nextLine());
-    //select문 사용 pmMno 넘겨서 이름 받아오기
-    if (CommandUtil.confirm(keyScan, /*이름*/"을 PM으로 지정")) {
-      System.out.println(/*이름*/"이 PM으로 지정되었습니다.");
-      
-    } else {
-      System.out.println(/*이름*/"을 PM으로 지정하지 않았습니다.");
-    }
-      
-  }
-
   
 
   
-
-  private void allList() {
-    // TODO Auto-generated method stub
-    
-  }
-
-  private void oneList() {
-    // TODO Auto-generated method stub
-    
-  }
-
-  private void delete() {
-    // TODO Auto-generated method stub
-    
-  }
-
-  private void update() {
-    // TODO Auto-generated method stub
-    
-  }
-
-  private void add() {
-    // TODO Auto-generated method stub
-    
-  }
-
-  private void certificationSupervise() {
-    // TODO Auto-generated method stub
-    
-  }
-
-  private void empoloyeeSupervise() {
-    // TODO Auto-generated method stub
-    
-  }
 
 }

@@ -6,22 +6,50 @@ import java.util.Scanner;
 import project.annotation.Controller;
 import project.annotation.RequestMapping;
 import project.dao.MembersDao;
-import project.domain.Certification;
 import project.domain.Members;
-import project.domain.Team;
 import project.util.CommandUtil;
 
 @Controller
 @RequestMapping("members/")
 public class MembersController {
   private MembersDao membersDao;
+  private Scanner keyScan;
+
+  public void setKeyScan(Scanner keyScan) {
+    this.keyScan = keyScan;
+  }
 
   public void setMembersDao(MembersDao membersDao) {
     this.membersDao = membersDao;
   }
+  
+  public void memberCRUD(String choice) {
+    switch (choice) {
+    case "1":
+      add();
+      break;
+    case "2":
+      update();
+      break;
+    case "3":
+      delete();
+      break;
+    case "4":
+      listOne();
+      break;
+    case "5":
+      list();
+      break;
+    case "6":
+      System.out.println();
+      break;
+    default:
+      System.out.println("잘못 입력하셨습니다.");
+    }
+  }
 
   @RequestMapping("add.do")
-  public void add(Scanner keyScan) {
+  public void add() {
     Members members = new Members();
     
     System.out.print("사원번호? ");
@@ -52,7 +80,7 @@ public class MembersController {
   }
   
   @RequestMapping("delete.do")
-  public void delete(Scanner keyScan) {
+  public void delete() {
     try {
       System.out.print("삭제할 사원 번호는? ");
       int no = Integer.parseInt(keyScan.nextLine());
@@ -91,7 +119,7 @@ public class MembersController {
   }
   
   @RequestMapping("listone.do")
-  public void listOne(Scanner keyScan) {
+  public void listOne() {
     try {
       System.out.print("검색할 사원 번호는? ");
       String name = keyScan.nextLine();
@@ -109,7 +137,7 @@ public class MembersController {
   }
   
   @RequestMapping("update.do")
-  public void update(Scanner keyScan) {
+  public void update() {
     try {
       System.out.print("변경할 사원 번호는? ");
       int no = Integer.parseInt(keyScan.nextLine());
