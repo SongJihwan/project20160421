@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="BoardDao">
+   <resultMap type="Board" id="BoardMap">
+   <id column="BNO" property="no"/>
+   <result column="TITLE" property="title"/>
+   <result column="VWCNT" property="views"/>
+   <result column="CDT" property="createdDate"/>
+   </resultMap>
+
+<insert id="insert" parameterType="Board">
+insert into BOARDS(TITLE,CONTS,PWD,CDT) values(#{title},#{content},#{password},now())
+</insert>
+
+<update id="update" parameterType="Board">
+update BOARDS set
+TITLE=#{title},
+CONTS=#{content},
+CDT=now()
+where BNO=#{no}
+</update>
+<delete id="delete" parameterType="int">
+delete from BOARDS
+where BNO=#{no}
+</delete>
+
+	<select id="selectList" resultMap="BoardMap">
+		select * from BOARDS
+	</select>
+	<select id="selectOne" parameterType="int" resultMap="BoardMap">
+    select * from BOARDS where BNO=#{no}
+  </select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
