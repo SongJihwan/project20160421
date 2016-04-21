@@ -8,6 +8,7 @@ import project.annotation.Controller;
 import project.annotation.RequestMapping;
 import project.dao.CertificationDao;
 import project.domain.Certification;
+import project.domain.Team;
 import project.util.CommandUtil;
 
 @Controller
@@ -34,6 +35,9 @@ public class CertificationController {
     case "4":
       list();
       break;
+    case "5":
+    	selectOne();
+    	break;
     case "6":
       System.out.println();
       break;
@@ -108,7 +112,25 @@ public class CertificationController {
     }
   }
   
-  @RequestMapping("update.do")
+  private void selectOne() {
+    System.out.print("검색할 자격증명? ");
+    String name = keyScan.nextLine();
+
+    try {
+    	Certification certification = certificationDao.selectOne(name);
+      if (certification == null) {
+        System.out.println("유효하지 않은 코드입니다.");
+        return;        
+      }
+      System.out.println(certification.getCertificationName());
+    } catch (Exception e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+    
+  }
+  
+  //@RequestMapping("update.do")
   public void update(Scanner keyScan) {
     try {
       System.out.print("변경할 자격증 번호?");
