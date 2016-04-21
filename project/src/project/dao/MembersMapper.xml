@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="MemberSDao">
+<mapper namespace="MembersDao">
 
 	<resultMap type="Members" id="MembersMap">
 		<id column="MNO" property="employeeNo" />
@@ -23,7 +23,7 @@
 		YEARS=#{years},
 		TEL=#{memberTel},
 		POSIT=#{position},
-		PWD=#{password},
+		PWD=#{password});
 	</insert>
 
 	<update id="update" parameterType="Members">
@@ -34,7 +34,7 @@
 		YEARS=#{years},
 		TEL=#{memberTel},
 		POSIT=#{position},
-		PWD=#{password},
+		PWD=#{password}
 		where MNO=#{employeeNo};
 	</update>
 

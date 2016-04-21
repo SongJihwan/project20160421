@@ -20,11 +20,12 @@ public class TeamDao {
   }
 
   public List<Team> selectList() throws Exception {
+    
     SqlSession sqlSession = sqlSessionFactory.openSession();
     try {
       return sqlSession.selectList("TeamDao.selectList");
 
-    } finally {
+  } finally {
       sqlSession.close();
 
     }
