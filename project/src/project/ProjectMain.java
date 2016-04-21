@@ -150,12 +150,12 @@ public class ProjectMain {
       choice = keyScan.nextLine();
       if (choice.equals("6")) 
         break;
-      adminMenuChoice(choice);
+      adminMenuChoice(choice);//
     }
   }
 
   private void adminMenuChoice(String choice) {
-    AdminController adminController = new AdminController();
+    AdminController adminController = (AdminController) appContext.getBean(AdminController.class);
     switch (choice) {
     case "1":
       empoloyeeSupervise();
