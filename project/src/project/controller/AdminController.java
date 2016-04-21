@@ -11,7 +11,7 @@ import project.annotation.RequestMapping;
 public class AdminController {
   private String choice;
   private Scanner keyScan = new Scanner(System.in);
-  private TeamController teamcontrol = new TeamController();
+  private TeamController teamcontrol;
   
   public void setKeyScan(Scanner keyScan) {
     this.keyScan = keyScan;

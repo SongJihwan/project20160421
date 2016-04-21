@@ -37,9 +37,7 @@ public class ProjectMain {
           "conf/mybatis-config.xml");
       appContext.addBean("sqlSessionFactory", 
           new SqlSessionFactoryBuilder().build(inputStream));
-//      for (Object obj : appContext.getBeans(Object)) {
-//        
-//      }
+      
     } catch (Exception e) {
       System.out.println("mybatis 준비 중 오류 발생!\n시스템을 종료하겠습니다.");
       e.printStackTrace();
@@ -157,7 +155,7 @@ public class ProjectMain {
   }
 
   private void adminMenuChoice(String choice) {
-    AdminController adminController = new AdminController();
+    AdminController adminController = (AdminController) appContext.getBean(AdminController.class);
     switch (choice) {
     case "1":
       empoloyeeSupervise();

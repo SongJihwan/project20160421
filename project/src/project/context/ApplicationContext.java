@@ -36,7 +36,6 @@ public class ApplicationContext {
     Object dependency = null;
     for (Object obj : objects) {
       clazz = obj.getClass();
-      
       if (!clazz.isAnnotationPresent(Component.class) && 
           !clazz.isAnnotationPresent(Controller.class)) {
         continue;
@@ -44,6 +43,7 @@ public class ApplicationContext {
       
       methods = clazz.getMethods();
       for (Method m : methods) {
+        
         if (!m.getName().startsWith("set")) 
           continue;
         

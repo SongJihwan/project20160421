@@ -10,12 +10,12 @@ import project.domain.Team;
 
 @Component
 public class TeamDao {
-  
   SqlSessionFactory sqlSessionFactory;
 
   public TeamDao() {}  
-
+  
   public void setSqlSessionFactory(SqlSessionFactory sqlSessionFactory) {
+    
     this.sqlSessionFactory = sqlSessionFactory;
   }
 

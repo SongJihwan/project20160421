@@ -23,7 +23,7 @@ C_DT=#{acquisitionDate}
 where MNO=#{employeeNo}
 </update>
 
-<delete id="delete" parameterType="Certification">
+<delete id="delete" parameterType="String">
 delete from CERTIFICATION
 where CNO=#{no}
 </delete>

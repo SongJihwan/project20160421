@@ -27,16 +27,16 @@ public class TeamController {
   public void teamCRUD(String choice) {
     switch (choice) {
     case "1":
-      add(keyScan);
+      add();
       break;
     case "2":
-      update(keyScan);
+      update();
       break;
     case "3":
-      delete(keyScan);
+      delete();
       break;
     case "4":
-      oneList(keyScan);
+      oneList();
       break;
     case "5":
       list();
@@ -49,7 +49,7 @@ public class TeamController {
     }
   }
 
-  private void oneList(Scanner keyScan) {
+  private void oneList() {
     System.out.print("검색할 부서명? ");
     String code = keyScan.nextLine();
 
@@ -68,7 +68,7 @@ public class TeamController {
   }
 
   //  @RequestMapping("add.do")
-  private void add(Scanner keyScan) {
+  private void add() {
     try {
       Team team = new Team();
 
@@ -89,7 +89,7 @@ public class TeamController {
   }
   
 //  @RequestMapping("delete.do")
-  private void delete(Scanner keyScan) {
+  private void delete() {
     try {
       System.out.print("삭제할 부서 코드?");
       String code = keyScan.nextLine();
@@ -125,7 +125,7 @@ public class TeamController {
   }
   
 //  @RequestMapping("update.do")
-  private void update(Scanner keyScan) {
+  private void update() {
     try {
       System.out.print("변경할 부서 코드? ");
       String code = keyScan.nextLine();
