@@ -5,10 +5,8 @@ import java.util.List;
 import java.util.Scanner;
 
 import project.annotation.Controller;
-import project.annotation.RequestMapping;
 import project.dao.CertificationDao;
 import project.domain.Certification;
-import project.domain.Team;
 import project.util.CommandUtil;
 
 @Controller

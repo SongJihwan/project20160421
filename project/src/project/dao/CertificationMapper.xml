@@ -5,20 +5,20 @@
 <mapper namespace="CertificationDao">
 
    <resultMap type="Certification" id="CertificationMap">
-   <id column="CNO" property="no"/>
+   <id column="CNO" property="certificationNo"/>
    <result column="CNM" property="certificationName"/>
    <result column="C_DT" property="acquisitionDate"/>
    <result column="MNO" property="employeeNo"/>
    </resultMap>
 
 <insert id="insert" parameterType="Certification">
-insert into CERTIFICATION(CNO,CNM,C_DT,MNO) values(#{no},#{certificationName},#{acquisitionDate},#{employeeNo})
+insert into CERTIFICATION(CNO,CNM,C_DT,MNO) values(#{certificationNo},#{certificationName},#{acquisitionDate},#{employeeNo})
 </insert>
 
 
 <update id="update" parameterType="Certification">
 update CERTIFICATION set
-CNO=#{no},
+CNO=#{certificationNo},
 CNM=#{certificationName},
 C_DT=#{acquisitionDate}
 where MNO=#{employeeNo}
@@ -26,13 +26,13 @@ where MNO=#{employeeNo}
 
 <delete id="delete" parameterType="String">
 delete from CERTIFICATION
-where CNO=#{no}
+where CNO=#{certificationNo}
 </delete>
 
 <select id="selectList" resultMap="CertificationMap">
 	select CNO, CNM, C_DT, MNO
     from CERTIFICATION
-	order by CNO asc
+	order by CNO
 </select>
 	
 	  
