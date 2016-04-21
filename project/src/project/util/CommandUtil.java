@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class CommandUtil {
   public static boolean confirm(Scanner keyScan, String message) {
     while (true) {
-      System.out.printf("%s(y/n) ", message);
+      System.out.printf("%s(y/n)하시겠습니까?", message);
       String input = keyScan.nextLine().toLowerCase();
       if (input.equals("y")) {
         return true;
