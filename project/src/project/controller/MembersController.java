@@ -79,8 +79,11 @@ public class MembersController {
       List<Members> membersList = membersDao.selectList();
       
       for (Members members : membersList) {
-        System.out.printf("%d, %s, %s, %s\n", members.getNo(),
-            members.getName(), members.getEmail(), members.getTel());
+        System.out.printf("%d, %s, %s, %s, %d, %s, %s, %s, %s\n", 
+            members.getEmployeeNo(), members.getTeamCode(), 
+            members.getName(), members.getEmail(), members.getYears(),
+            members.getMemberTel(), members.getPosition(), 
+            members.getPassword(), members.getRole());
       }
     } catch (Exception e) {
       throw new RuntimeException("사원 데이터 로딩 실패!", e);
@@ -94,7 +97,7 @@ public class MembersController {
       String name = keyScan.nextLine();
       Members membersList = membersDao.selectOne(name);
 
-      System.out.printf("%d, %s, %s, %s\n", 
+      System.out.printf("%d, %s, %s, %s, %d, %s, %s, %s, %s\n", 
           membersList.getEmployeeNo(), membersList.getTeamCode(), 
           membersList.getName(), membersList.getEmail(), membersList.getYears(),
           membersList.getMemberTel(), membersList.getPosition(), 
