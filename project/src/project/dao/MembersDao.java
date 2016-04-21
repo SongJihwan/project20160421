@@ -23,19 +23,31 @@ public class MembersDao {
     SqlSession sqlSession = sqlSessionFactory.openSession();
     
     try {
-      return sqlSession.selectList("MemberDao.selectList");
+      return sqlSession.selectList("MembersDao.selectList");
     } finally {
       sqlSession.close();
     }
   }
   
-  public Members selectOne(int no) throws Exception {
+  public Members selectOne(String name) throws Exception {
+    SqlSession sqlSession = sqlSessionFactory.openSession();
+    
+    try {
+      HashMap<String,Object> paramMap = new HashMap<>();
+      paramMap.put("String", name);
+      return sqlSession.selectOne("MembersDao.selectOne", paramMap);
+    } finally {
+      sqlSession.close();
+    }
+  }
+  
+  public Members selectOneUpdate(int no) throws Exception {
     SqlSession sqlSession = sqlSessionFactory.openSession();
     
     try {
       HashMap<String,Object> paramMap = new HashMap<>();
       paramMap.put("no", no);
-      return sqlSession.selectOne("MemberDao.selectOne", paramMap);
+      return sqlSession.selectOne("MembersDao.selectOneUpdate", paramMap);
     } finally {
       sqlSession.close();
     }
@@ -47,29 +59,29 @@ public class MembersDao {
     try {
       HashMap<String,Object> paramMap = new HashMap<>();
       paramMap.put("email", email);
-      return sqlSession.selectOne("MemberDao.selectOne", paramMap);
+      return sqlSession.selectOne("MembersDao.selectOne", paramMap);
     } finally {
       sqlSession.close();
     } 
     
   }
   
-  public int insert(Members member) throws Exception {
+  public int insert(Members members) throws Exception {
     SqlSession sqlSession = sqlSessionFactory.openSession(true);
     
     try {
-      return sqlSession.insert("MemberDao.insert", member);
+      return sqlSession.insert("MembersDao.insert", members);
       
     } finally {
       sqlSession.close();
     }
   }
   
-  public int update(Members member) throws Exception {
+  public int update(Members members) throws Exception {
     SqlSession sqlSession = sqlSessionFactory.openSession();
     
     try {
-      int count = sqlSession.update("MemberDao.update", member);
+      int count = sqlSession.update("MembersDao.update", members);
       sqlSession.commit();
       return count;
       
@@ -82,7 +94,7 @@ public class MembersDao {
     SqlSession sqlSession = sqlSessionFactory.openSession();
     
     try {
-      int count = sqlSession.delete("MemberDao.delete", no);
+      int count = sqlSession.delete("MembersDao.delete", no);
       sqlSession.commit();
       return count;
       
@@ -91,7 +103,7 @@ public class MembersDao {
     }
   }
 
-  public boolean isMember(String email, String password) {
+  public boolean isMembers(String email, String password) {
     SqlSession sqlSession = sqlSessionFactory.openSession();
     
     try {
@@ -99,7 +111,7 @@ public class MembersDao {
       paramMap.put("email", email);
       paramMap.put("password", password);
       
-      int count = sqlSession.selectOne("MemberDao.isMember", paramMap);
+      int count = sqlSession.selectOne("MembersDao.isMembers", paramMap);
       
       if (count > 0) 
         return true;

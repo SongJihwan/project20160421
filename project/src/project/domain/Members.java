@@ -1,4 +1,7 @@
 package project.domain;
+
+import java.util.List;
+
 public class Members {
   int employeeNo; //PK
   String teamCode; //FK
@@ -9,7 +12,46 @@ public class Members {
   String position;
   String password;
   String role; //FK
+  List<Team> team;
+  List<Certification> Certification;
   
+  public Members() {}
+  
+  public Members(int employeeNo, String teamCode, String name, String email, int years, String memberTel,
+      String position, String password, String role, List<Team> team,
+      List<Certification> certification) {
+    super();
+    this.employeeNo = employeeNo;
+    this.teamCode = teamCode;
+    this.name = name;
+    this.email = email;
+    this.years = years;
+    this.memberTel = memberTel;
+    this.position = position;
+    this.password = password;
+    this.role = role;
+    this.team = team;
+    this.Certification = certification;
+  }
+  
+  
+  
+  public List<Team> getTeam() {
+    return team;
+  }
+
+  public void setTeam(List<Team> team) {
+    this.team = team;
+  }
+
+  public List<Certification> getCertification() {
+    return Certification;
+  }
+
+  public void setCertification(List<Certification> certification) {
+    Certification = certification;
+  }
+
   public int getEmployeeNo() {
     return employeeNo;
   }
