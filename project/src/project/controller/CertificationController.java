@@ -14,11 +14,34 @@ import project.util.CommandUtil;
 //@RequestMapping("certification/")
 public class CertificationController {
   private CertificationDao certificationDao;
+  private Scanner keyScan= new Scanner(System.in);
   
   public void setCertificationDao(CertificationDao certificationDao) {
     this.certificationDao = certificationDao;
   }
-
+  
+  public void certiCRUD(String choice) {
+    switch (choice) {
+    case "1":
+      add(keyScan);
+      break;
+    case "2":
+      update(keyScan);
+      break;
+    case "3":
+      delete(keyScan);
+      break;
+    case "4":
+      list();
+      break;
+    case "6":
+      System.out.println();
+      break;
+    default:
+      System.out.println("잘못 입력하셨습니다.");
+    }
+  }
+  
  // @RequestMapping("add.do")
   public void add(Scanner keyScan) {
     try {
